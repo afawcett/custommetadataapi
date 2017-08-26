@@ -29,8 +29,13 @@ public with sharing class MetadataRecordDataController {
     @AuraEnabled
     public static SObject loadRecord(String fullName, String fields) {
         // TODO: Protected against SOQL injection etc...
+        // TODO: Better unhandled excepiton handling, looks like these have to be wrapped in AuraHandledException's
         List<String> fullNameParts = fullName.split('\\.');
-        return Database.query('select ' + fields + ' from ' + fullNameParts[0] + '__mdt where DeveloperName = \'' + fullNameParts[1] + '\'');
+        List<SObject> records = Database.query('select ' + fields + ' from ' + fullNameParts[0] + '__mdt where DeveloperName = \'' + fullNameParts[1] + '\'');
+        if(records.size()==0) {
+            throw new AuraHandledException('Record not found');
+        }
+        return records[0];        
     } 
     
     @AuraEnabled

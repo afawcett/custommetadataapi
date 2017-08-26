@@ -31,15 +31,23 @@
             var state = response.getState();
             if (state === "SUCCESS") {
                 cmp.set('v.targetRecord', response.getReturnValue());
+                var messageEvent = cmp.getEvent('metadataRecordDataResult');
+                messageEvent.setParam("changeType", "LOADED");
+                messageEvent.fire();                                                
             } else {
                 var errors = response.getError();
+                var errorMessage = null;
                 if (errors) {
                     if (errors[0] && errors[0].message) {
-                        console.log("Error message: " + errors[0].message);
+                        errorMessage = errors[0].message;
                     }
                 } else {
-                    console.log("Unknown error");
+                    errorMessage = "Unknown error";
                 }
+                var messageEvent = cmp.getEvent('metadataRecordDataResult');
+                messageEvent.setParam("result", errorMessage);
+                messageEvent.setParam("changeType", "ERROR");
+                messageEvent.fire();                                
             }            
         });
         $A.enqueueAction(action);        
@@ -53,13 +61,18 @@
                 cmp.set('v.deploymentId', response.getReturnValue());
             } else {
                 var errors = response.getError();
+                var errorMessage = null;
                 if (errors) {
                     if (errors[0] && errors[0].message) {
-                        console.log("Error message: " + errors[0].message);
+                        errorMessage = errors[0].message;
                     }
                 } else {
-                    console.log("Unknown error");
+                    errorMessage = "Unknown error";
                 }
+                var messageEvent = cmp.getEvent('metadataRecordDataResult');
+                messageEvent.setParam("result", errorMessage);
+                messageEvent.setParam("changeType", "ERROR");
+                messageEvent.fire();                
             }        
         });
         $A.enqueueAction(action);                
@@ -71,6 +84,7 @@
         if(deploymentId == component.get('v.deploymentId')) {
             var messageEvent = component.getEvent('metadataRecordDataResult');
             messageEvent.setParam("result", JSON.parse(payload.Result__c));
+            messageEvent.setParam("changeType", "CHANGED");
             messageEvent.fire();            
         }
     }

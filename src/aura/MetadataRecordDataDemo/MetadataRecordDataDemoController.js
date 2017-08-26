@@ -30,11 +30,18 @@
 	},
 	handleSaveResult : function(component, event, helper) {
         component.find('saveButton').set('v.disabled', false);
+        var changeType = event.getParam('changeType');
         var result = event.getParam("result");
-        if(result[0].status) {
-            component.set('v.errors', null);
+        if(changeType == 'CHANGED') {
+            if(result[0].status) {
+                component.set('v.errors', null);
+            } else {
+                component.set('v.errors', result[0].message);
+            }
+        } else if(changeType == 'ERROR') {
+            component.set('v.errors', result);
         } else {
-            component.set('v.errors', result[0].message);
+            component.set('v.errors', null);
         }
 	}
 })
