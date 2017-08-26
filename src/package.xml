@@ -14,5 +14,9 @@
         <members>MetadataRecordDataController</members>
         <name>ApexClass</name>
     </types>
+    <types>
+        <members>cometd</members>
+        <name>StaticResource</name>
+    </types>
     <version>40.0</version>
 </Package>
