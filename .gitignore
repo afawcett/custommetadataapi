@@ -2,3 +2,5 @@
 .settings/com.salesforce.ide.core.prefs
 
 salesforce.schema
+
+.tern-project

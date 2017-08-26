@@ -28,22 +28,37 @@
 <aura:component implements="flexipage:availableForAllPageTypes">
 
     <aura:attribute name="record" type="object" default="{}"/>
+    <aura:attribute name="errors" type="string"/>
 
     <c:MetadataRecordData aura:id="recordData"
-        recordFullName="LookupRollupSummary2.MyRecord2"
+        recordFullName="WidgetPreset.BluetoohToothbrush"
         targetRecord="{!v.record}"
-        targetFields="DeveloperName, Label, ParentObject__c, ChildObject__c"
-        />
+        targetFields="DeveloperName, Label, DefaultNotification__c, Alias__c"/>
         
-    <aura:handler name="metadataRecordDataResult" event="c:MetadataRecordDataResult" action="{!c.handleSaveResult}"/>        
+    <aura:handler name="metadataRecordDataResult" 
+        event="c:MetadataRecordDataResult"
+        action="{!c.handleSaveResult}"/>        
                 
     <lightning:card >
+        <aura:if isTrue="{!v.errors}">
+            <ui:message title="Error" severity="error">{!v.errors}</ui:message>        
+        </aura:if>
         <p class="slds-p-horizontal--small">
-            <lightning:input aura:id="recordField" name="fullName" label="Developer Name" value="{!v.record.DeveloperName}" required="true"/>
-            <lightning:input aura:id="recordField" name="label" label="Label" value="{!v.record.Label}" required="true"/>
-            <lightning:input aura:id="recordField" name="parentObject" label="Parent Object" value="{!v.record.ParentObject__c}"  required="true"/>
-            <lightning:input aura:id="recordField" type="childObject" name="email" label="Child Object" value="{!v.record.ChildObject__c}"  required="true"/>
-            <lightning:button aura:id="saveButton" label="Save" onclick="{!c.handleSave}" variant="brand" class="slds-m-top--medium"/>
+            <lightning:input aura:id="recordField" 
+                name="fullName" label="Developer Name" 
+                value="{!v.record.DeveloperName}" required="true"/>
+            <lightning:input aura:id="recordField" 
+                name="label" label="Label" 
+                value="{!v.record.Label}" required="true"/>
+            <lightning:input aura:id="recordField"
+                name="parentObject"  label="Default Notificaition" 
+                value="{!v.record.DefaultNotification__c}"/>
+            <lightning:input aura:id="recordField"
+                name="email" label="Alias" 
+                value="{!v.record.Alias__c}"/>
+            <lightning:button aura:id="saveButton"
+                label="Save" onclick="{!c.handleSave}"
+                variant="brand" class="slds-m-top--medium"/>
         </p>
     </lightning:card>        
     	

@@ -30,5 +30,11 @@
 	},
 	handleSaveResult : function(component, event, helper) {
         component.find('saveButton').set('v.disabled', false);
+        var result = event.getParam("result");
+        if(result[0].status) {
+            component.set('v.errors', null);
+        } else {
+            component.set('v.errors', result[0].message);
+        }
 	}
 })

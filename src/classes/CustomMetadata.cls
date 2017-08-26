@@ -33,22 +33,19 @@
             MetadataDeployment__e.DeploymentId__c,
             MetadataDeployment__e.Result__c)
         .enqueueUpsertRecords(
-            // Metadata record type
-            LookupRollupSummary2__mdt.getSObjectType(), 
+            // Custom Metadata object type
+            WidgetPreset__mdt.getSObjectType(), 
             new List<Map<SObjectField, Object>> {
-                // Metadata record 
+                // Custom Metadata record 
                 new Map<SObjectField, Object> {
-                    LookupRollupSummary2__mdt.DeveloperName => 'MyRecord2',
-                    LookupRollupSummary2__mdt.Label => 'My Record',
-                    LookupRollupSummary2__mdt.ParentObject__c => 'Account',
-                    LookupRollupSummary2__mdt.AggregateResultField__c => 'X',
-                    LookupRollupSummary2__mdt.ChildObject__c => 'Opportunity',
-                    LookupRollupSummary2__mdt.FieldToAggregate__c => 'Amount',
-                    LookupRollupSummary2__mdt.RelationshipField__c => 'AccountId'
+                    WidgetPreset__mdt.DeveloperName => 'BluetoohToothbrush',
+                    WidgetPreset__mdt.Label => 'Bluetooh Toothbrush',
+                    WidgetPreset__mdt.DefaultNotification__c => 'Good day!',
+                    WidgetPreset__mdt.Alias__c => 'wdbtt'
             } } );
             
-    LookupRollupSummary2__mdt readRecord = 
-        [select DeveloperName, Label, ParentObject__c, ChildObject__c from LookupRollupSummary2__mdt limit 1];
+    WidgetPreset__mdt readRecord = 
+        [select DeveloperName, Label, DefaultNotification__c, Alias__c from WidgetPreset__mdt limit 1];
 
     CustomMetadata.Operations
         .callback(
@@ -159,8 +156,7 @@ public with sharing class CustomMetadata {
          **/
         public Operations callback(SObjectType eventType, SObjectField deploymentIdField, SObjectField messageField) {
             return callback(new PublishEventCallback(eventType, deploymentIdField, messageField));
-        }
-        
+        }        
     }    
     
     /**
@@ -186,7 +182,7 @@ public with sharing class CustomMetadata {
             // Call method to publish events
             List<Database.SaveResult> results = Platform.eventBusPublish(new List<SObject> { event });
             // Inspect publishing result for each event
-            // TODO: Consider another way to report this, since this is the phantom users options are limited
+            // TODO: Consider another way to report this, since this is the phantom user context, options are limited
             for (Database.SaveResult sr : results) {
                 if (sr.isSuccess()) {
                     System.debug('Successfully published event.');
@@ -234,7 +230,7 @@ public with sharing class CustomMetadata {
         private SaveRecordResult convertToSaveResult(Metadata.DeployMessage deployMessage) {
             SaveRecordResult srr = new SaveRecordResult();
             srr.fullName = deployMessage.fullName;
-            srr.status = deployMessage.success;
+            srr.success = deployMessage.success;
             srr.message = deployMessage.problem;
             return srr;            
         }
@@ -250,7 +246,7 @@ public with sharing class CustomMetadata {
         // TODO: Maybe resolve to the SObjectType and avoid namespace issues, does this marshal via Aura though?
         public String fullName;
         @AuraEnabled
-        public Boolean status;
+        public Boolean success;
         @AuraEnabled
         public String message;
     }

@@ -18,5 +18,14 @@
         <members>cometd</members>
         <name>StaticResource</name>
     </types>
+    <types>
+        <members>MetadataDeployment__e</members>
+        <members>WidgetPreset__mdt</members>        
+        <name>CustomObject</name>
+    </types>
+    <types>
+        <members>WidgetPreset.BluetoohToothbrush</members>
+        <name>CustomMetadata</name>
+    </types>
     <version>40.0</version>
 </Package>

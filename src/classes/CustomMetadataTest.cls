@@ -65,7 +65,7 @@ private class CustomMetadataTest {
         System.assertEquals(
             'My Record', ((Metadata.CustomMetadata) mockPlatform.metadataEnqueueDeploymentContainer.getMetadata()[0]).values[0].value);        
         System.assertEquals(
-            '[{"status":true,"fullName":"Account"}]', 
+            '[{"success":true,"fullName":"Account"}]', 
             mockPlatform.eventBusPublishEvents[0].get('Description'));
     }    
 
@@ -103,7 +103,7 @@ private class CustomMetadataTest {
         System.assertEquals(
             'My Record', ((Metadata.CustomMetadata) mockPlatform.metadataEnqueueDeploymentContainer.getMetadata()[0]).values[0].value);        
         System.assertEquals(
-            '[{"status":true,"fullName":"Account"}]', 
+            '[{"success":true,"fullName":"Account"}]', 
             mockPlatform.eventBusPublishEvents[0].get('Description'));
     }    
     
