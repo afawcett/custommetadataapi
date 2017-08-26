@@ -28,6 +28,7 @@ public with sharing class MetadataRecordDataController {
 
     @AuraEnabled
     public static SObject loadRecord(String fullName, String fields) {
+        // TODO: Protected against SOQL injection etc...
         List<String> fullNameParts = fullName.split('\\.');
         return Database.query('select ' + fields + ' from ' + fullNameParts[0] + '__mdt where DeveloperName = \'' + fullNameParts[1] + '\'');
     } 
