@@ -33,14 +33,10 @@
         var changeType = event.getParam('changeType');
         var result = event.getParam("result");
         if(changeType == 'CHANGED') {
-            if(result[0].status) {
-                component.set('v.errors', null);
-            } else {
-                component.set('v.errors', result[0].message);
-            }
+            component.set('v.errors', null);
         } else if(changeType == 'ERROR') {
-            component.set('v.errors', result);
-        } else {
+            component.set('v.errors', result.fullName ? result.message : result);
+        } else if(changeType == 'LOADED') {
             component.set('v.errors', null);
         }
 	}

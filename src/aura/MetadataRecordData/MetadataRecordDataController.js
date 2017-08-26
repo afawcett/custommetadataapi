@@ -79,12 +79,14 @@
     },
     handleDeploymentEvent : function(component, event, helper) {
         var payload = event.getParam("payload");
+        var results = JSON.parse(payload.Result__c);
+        var result = results[0];
         var deploymentId = payload.DeploymentId__c;
         console.log(payload);
         if(deploymentId == component.get('v.deploymentId')) {
             var messageEvent = component.getEvent('metadataRecordDataResult');
-            messageEvent.setParam("result", JSON.parse(payload.Result__c));
-            messageEvent.setParam("changeType", "CHANGED");
+            messageEvent.setParam("result", result);
+            messageEvent.setParam("changeType", result.success ? "CHANGED" : "ERROR");
             messageEvent.fire();            
         }
     }
