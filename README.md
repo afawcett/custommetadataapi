@@ -1,2 +1,2 @@
-# custommetadataapi
-Apex Library for working with Custom Metadata Records
+# Custom Metadata API
+Apex and Lightning Components for working with Custom Metadata Records
