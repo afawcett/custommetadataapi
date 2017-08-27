@@ -82,7 +82,6 @@
         var results = JSON.parse(payload.Result__c);
         var result = results[0];
         var deploymentId = payload.DeploymentId__c;
-        console.log(payload);
         if(deploymentId == component.get('v.deploymentId')) {
             var messageEvent = component.getEvent('metadataRecordDataResult');
             messageEvent.setParam("result", result);
