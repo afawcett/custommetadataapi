@@ -30,7 +30,7 @@
     <aura:attribute name="record" type="object" default="{}"/>
     <aura:attribute name="errors" type="string"/>
 
-    <c:MetadataRecordData aura:id="recordData"
+    <c:metadataRecordData aura:id="recordData"
         recordFullName="WidgetPreset.BluetoohToothbrush"
         targetRecord="{!v.record}"
         targetFields="DeveloperName, Label, DefaultNotification__c, Alias__c"/>

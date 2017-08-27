@@ -35,10 +35,10 @@
     <aura:method name="saveRecord" action="{!c.saveRecord}"/> 
     
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>    
-    <aura:handler name="messageReceived" event="c:StreamingEvent" action="{!c.handleDeploymentEvent}"/>
+    <aura:handler name="messageReceived" event="c:streamingEvent" action="{!c.handleDeploymentEvent}"/>
     
-    <aura:registerEvent name="metadataRecordDataResult" type="c:MetadataRecordDataResult"/>
+    <aura:registerEvent name="metadataRecordDataResult" type="c:metadataRecordDataResult"/>
 
-    <c:Streaming channel="/event/MetadataDeployment__e"/>
+    <c:streaming channel="/event/MetadataDeployment__e"/>
     	
 </aura:component>
