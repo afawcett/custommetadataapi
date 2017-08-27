@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION">
+    <aura:attribute name="changeType" type="String"/>    
+    <aura:attribute name="result" type="Object"/>
+</aura:event>
