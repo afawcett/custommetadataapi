@@ -1,0 +1,52 @@
+<apex:page controller="CustomMetadataDemoController" tabStyle="CustomMetadataDemo__tab" showHeader="true" sidebar="true" action="{!init}">
+    <apex:includeScript value="{!$Resource.cometd}/cometd.js"/>
+    <script type="text/javascript">
+        var cometd = new window.org.cometd.CometD();
+        cometd.configure({
+            url: window.location.protocol + '//' + window.location.hostname + '/cometd/40.0/',
+            requestHeaders: { Authorization: 'OAuth {!$Api.Session_ID}' },
+            appendMessageTypeToURL : false
+        });
+        cometd.handshake(function(status) {
+            if (status.successful) {
+                cometd.subscribe('/event/MetadataDeployment__e', function(message) {
+                    if(message.data.payload.DeploymentId__c == window.deployId) {
+                        saveHandler(message.data.payload.Result__c.replace('[', '').replace(']',''));
+                    }
+                });
+            } else {
+                console.log(status);
+            }
+        });    
+    </script>    
+    <apex:form id="recordView">
+        <apex:actionFunction name="saveHandler" action="{!saveHandler}" rerender="recordView">
+            <apex:param name="DeployResult" assignTo="{!DeployResult}" value=""/>
+        </apex:actionFunction> 
+        <apex:pageMessages />
+        <apex:pageBlock mode="edit">
+            <script>window.deployId = '{!DeployId}';</script>
+            <apex:pageBlockButtons >
+                <apex:commandButton id="savebtn" value="Save" action="{!save}" disabled="{!DeployId!=null}" reRender="recordView"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Detail" columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Developer Name"/>
+                    <apex:inputText value="{!Record.DeveloperName}"/>                 
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Label"/>
+                    <apex:inputText value="{!Record.Label}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Default Notificaition"/>
+                    <apex:inputText value="{!Record.DefaultNotification__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Alias"/>
+                    <apex:inputText value="{!Record.Alias__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>                    
+        </apex:pageBlock>    
+    </apex:form>
+</apex:page>

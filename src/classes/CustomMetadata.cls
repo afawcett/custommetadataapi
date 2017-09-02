@@ -26,7 +26,8 @@
 
 /**
  *
-    CustomMetadata.Operations
+    String deployId = 
+      CustomMetadata.Operations
         .callback(
             // Platform event for deploy status
             MetadataDeployment__e.getSObjectType(),
@@ -41,20 +42,22 @@
                     WidgetPreset__mdt.DeveloperName => 'BluetoohToothbrush',
                     WidgetPreset__mdt.Label => 'Bluetooh Toothbrush',
                     WidgetPreset__mdt.DefaultNotification__c => 'Good day!',
-                    WidgetPreset__mdt.Alias__c => 'wdbtt'
-            } } );
+                    WidgetPreset__mdt.Alias__c => 'wdbtt' } } )
+        .deployId;
             
     WidgetPreset__mdt readRecord = 
         [select DeveloperName, Label, DefaultNotification__c, Alias__c from WidgetPreset__mdt limit 1];
 
-    CustomMetadata.Operations
+    String deployId = 
+      CustomMetadata.Operations
         .callback(
             // Platform event for deploy status
             MetadataDeployment__e.getSObjectType(), 
             MetadataDeployment__e.DeploymentId__c,
             MetadataDeployment__e.Result__c)
         .enqueueUpsertRecords(
-            new List<SObject> { readRecord } );            
+            new List<SObject> { readRecord } )
+        .deployId;            
  **/                
 
 public with sharing class CustomMetadata {
@@ -158,6 +161,22 @@ public with sharing class CustomMetadata {
             return callback(new PublishEventCallback(eventType, deploymentIdField, messageField));
         }        
     }    
+    
+    /**
+     * Example callback to dump results to debug log
+     **/
+    public class DebugCallback extends SaveResultCallback {
+        public override void handleResult(String deployId, List<SaveRecordResult> results) {
+            System.debug('Deploy Id is ' + deployId);
+            for(SaveRecordResult result : results) {
+                System.debug('Fullname of custom metadata reocord is ' + result.fullName);
+                System.debug('Success is ' + result.success);
+                if(!result.success) {
+                    System.debug('Message is' + result.message);                                    
+                }
+            }            
+        }
+    }
     
     /**
      * Sends a Platform Event in response to a Metadata Deploy callback
