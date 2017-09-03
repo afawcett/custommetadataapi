@@ -24,6 +24,14 @@
         <name>CustomObject</name>
     </types>
     <types>
+        <members>CustomMetadataDemoController</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>custommetadatademo</members>
+        <name>ApexPage</name>
+    </types>
+    <types>
         <members>WidgetPreset.BluetoohToothbrush</members>
         <name>CustomMetadata</name>
     </types>
