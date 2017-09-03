@@ -1,4 +1,4 @@
-<apex:page controller="CustomMetadataDemoController" tabStyle="CustomMetadataDemo__tab" showHeader="true" sidebar="true" action="{!init}">
+<apex:page controller="CustomMetadataDemoController" showHeader="true" sidebar="true" action="{!init}">
     <apex:includeScript value="{!$Resource.cometd}/cometd.js"/>
     <script type="text/javascript">
         var cometd = new window.org.cometd.CometD();
