@@ -33,11 +33,8 @@
     <c:metadataRecordData aura:id="recordData"
         recordFullName="WidgetPreset.BluetoohToothbrush"
         targetRecord="{!v.record}"
-        targetFields="DeveloperName, Label, DefaultNotification__c, Alias__c"/>
-        
-    <aura:handler name="metadataRecordDataResult" 
-        event="c:MetadataRecordDataResult"
-        action="{!c.handleSaveResult}"/>        
+        targetFields="DeveloperName, Label, DefaultNotification__c, Alias__c"
+        recordUpdated="{!c.handleSaveResult}"/> 
                 
     <lightning:card >
         <aura:if isTrue="{!v.errors}">

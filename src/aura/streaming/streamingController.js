@@ -17,7 +17,7 @@
                 if (status.successful) {
                     var eventName = component.get("v.channel");
                     cometd.subscribe(eventName, $A.getCallback(function(message) {
-                            var messageEvent = component.getEvent("messageReceived");
+                            var messageEvent = component.getEvent("onMessage");
                             messageEvent.setParam("payload", message.data.payload);
                             messageEvent.fire();
                         }

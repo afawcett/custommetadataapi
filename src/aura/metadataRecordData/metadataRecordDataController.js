@@ -31,7 +31,7 @@
             var state = response.getState();
             if (state === "SUCCESS") {
                 cmp.set('v.targetRecord', response.getReturnValue());
-                var messageEvent = cmp.getEvent('metadataRecordDataResult');
+                var messageEvent = cmp.getEvent('recordUpdated');
                 messageEvent.setParam("changeType", "LOADED");
                 messageEvent.fire();                                                
             } else {
@@ -44,7 +44,7 @@
                 } else {
                     errorMessage = "Unknown error";
                 }
-                var messageEvent = cmp.getEvent('metadataRecordDataResult');
+                var messageEvent = cmp.getEvent('recordUpdated');
                 messageEvent.setParam("result", errorMessage);
                 messageEvent.setParam("changeType", "ERROR");
                 messageEvent.fire();                                
@@ -69,7 +69,7 @@
                 } else {
                     errorMessage = "Unknown error";
                 }
-                var messageEvent = cmp.getEvent('metadataRecordDataResult');
+                var messageEvent = cmp.getEvent('recordUpdated');
                 messageEvent.setParam("result", errorMessage);
                 messageEvent.setParam("changeType", "ERROR");
                 messageEvent.fire();                
@@ -83,7 +83,7 @@
         var result = results[0];
         var deploymentId = payload.DeploymentId__c;
         if(deploymentId == component.get('v.deploymentId')) {
-            var messageEvent = component.getEvent('metadataRecordDataResult');
+            var messageEvent = component.getEvent('recordUpdated');
             messageEvent.setParam("result", result);
             messageEvent.setParam("changeType", result.success ? "CHANGED" : "ERROR");
             messageEvent.fire();            
