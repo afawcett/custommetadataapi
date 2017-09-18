@@ -54,8 +54,7 @@
                 name="email" label="Alias" 
                 value="{!v.record.Alias__c}"/>
             <lightning:button aura:id="saveButton"
-                label="Save" onclick="{!c.handleSave}"
-                variant="brand" class="slds-m-top--medium"/>
+                label="Save" onclick="{!c.handleSave}" class="slds-m-top--medium"/>
         </p>
     </lightning:card>        
     	
