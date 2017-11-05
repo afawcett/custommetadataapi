@@ -11,6 +11,7 @@
                 requestHeaders: { Authorization: 'OAuth ' + sessionId},
                 appendMessageTypeToURL : false
             });
+            cometd.websocketEnabled = false;
 
             // Connect to 
             cometd.handshake($A.getCallback(function(status) {
