@@ -12,10 +12,7 @@
                 appendMessageTypeToURL : false
             });
             cometd.websocketEnabled = false;
-<<<<<<< HEAD
             component.set('v.cometd', cometd);
-=======
->>>>>>> 8dfdedf37e970a7a79d701f8982580b188012027
 
             // Connect to 
             cometd.handshake($A.getCallback(function(status) {
@@ -24,17 +21,10 @@
                     var subscription = 
                         cometd.subscribe(eventName, $A.getCallback(function(message) {
                             var messageEvent = component.getEvent("onMessage");
-<<<<<<< HEAD
 	                        if(messageEvent!=null) {
                                 messageEvent.setParam("payload", message.data.payload);
                                 messageEvent.fire();                            
 	                        }
-=======
-                            if(messageEvent!=null) {                                
-                                messageEvent.setParam("payload", message.data.payload);
-                                messageEvent.fire();
-                            }
->>>>>>> 8dfdedf37e970a7a79d701f8982580b188012027
                         }
                     ));
                     component.set('v.subscription', subscription);
