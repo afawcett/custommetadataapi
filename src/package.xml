@@ -17,7 +17,6 @@
     </types>
     <types>
         <members>MetadataDeployment__e</members>
-        <members>WidgetPreset__mdt</members>        
         <name>CustomObject</name>
     </types>
     <types>
