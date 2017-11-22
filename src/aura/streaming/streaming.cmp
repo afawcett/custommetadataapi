@@ -1,5 +1,8 @@
 <aura:component access="global" controller="SessionController">
     <aura:attribute name="channel" type="String" required="true"/>
+    <aura:attribute name="cometd" type="Object"/>
+    <aura:attribute name="subscription" type="Object"/>
+    <aura:handler name="destroy" value="{!this}" action="{!c.handleDestroy}"/>
     <aura:registerEvent name="onMessage" type="c:streamingEvent"/>
     <ltng:require scripts="{!$Resource.cometd + '/cometd.js'}" afterScriptsLoaded="{!c.doInit}" />    
 </aura:component>
