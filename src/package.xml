@@ -5,6 +5,7 @@
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
+        <members>SessionController</members>    
         <members>CustomMetadata</members>
         <members>CustomMetadataTest</members>
         <members>MetadataRecordDataController</members>
