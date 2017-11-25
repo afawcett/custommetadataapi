@@ -136,7 +136,7 @@ public with sharing class CustomMetadata {
                     } else {                
                         Metadata.CustomMetadataValue cmv = new Metadata.CustomMetadataValue();
                         cmv.field = dsr.getName();
-                        cmv.value = fieldValue;
+                        cmv.value = dsr.soapType == Schema.SoapType.ID ? String.valueOf(fieldValue) : fieldValue;
                         customMetadataRecord.values.add(cmv);
                     }
                 }           
