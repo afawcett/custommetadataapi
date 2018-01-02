@@ -25,7 +25,7 @@
 **/
 
 @IsTest
-private class CustomMetadataTest {
+public class CustomMetadataTest {
         
     @IsTest
     private static void whenUpsertingByFieldMapSendsEvent() {
@@ -108,7 +108,8 @@ private class CustomMetadataTest {
     }    
     
     /**
-     * Mock platform API behaviours and responses
+     * Mock platform API behaviours and responses. Public so applications can mock their own metadata deploy
+     * responses following the pattern of the testmethods in this test class 
      **/
     public class MockPlatform extends CustomMetadata.Platform {
         
