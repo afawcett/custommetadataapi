@@ -11,26 +11,6 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>ApexClassNamespacePrefix__c</fullName>
-        <externalId>false</externalId>
-        <fieldManageability>SubscriberControlled</fieldManageability>
-        <label>Apex Class Namespace Prefix</label>
-        <length>16</length>
-        <required>false</required>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>ApexClass__c</fullName>
-        <externalId>false</externalId>
-        <fieldManageability>SubscriberControlled</fieldManageability>
-        <label>Apex Class</label>
-        <length>64</length>
-        <required>false</required>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>DefaultNotification__c</fullName>
         <externalId>false</externalId>
         <fieldManageability>SubscriberControlled</fieldManageability>
@@ -39,17 +19,6 @@
         <required>false</required>
         <type>Text</type>
         <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>InterfaceType__c</fullName>
-        <caseSensitive>false</caseSensitive>
-        <externalId>false</externalId>
-        <fieldManageability>DeveloperControlled</fieldManageability>
-        <label>Interface Type</label>
-        <length>255</length>
-        <required>false</required>
-        <type>Text</type>
-        <unique>true</unique>
     </fields>
     <label>Widget Present</label>
     <pluralLabel>Widget Presents</pluralLabel>
