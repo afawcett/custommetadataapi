@@ -1,4 +1,4 @@
-<aura:event type="APPLICATION">
-    <aura:attribute name="changeType" type="String"/>    
-    <aura:attribute name="result" type="Object"/>
+<aura:event type="APPLICATION" access="global">
+    <aura:attribute name="changeType" type="String" access="global"/>    
+    <aura:attribute name="result" type="Object" access="global"/>
 </aura:event>

@@ -25,19 +25,20 @@
  *  ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 **/
 -->
-<aura:component controller="MetadataRecordDataController">
+<aura:component controller="MetadataRecordDataController" access="global">
 
-    <aura:attribute name="recordFullName" type="string" access="public"/>        
-    <aura:attribute name="targetRecord" type="object" access="public"/>
-    <aura:attribute name="targetFields" type="string" access="public"/>
+    <aura:attribute name="recordFullName" type="string" access="global"/>        
+    <aura:attribute name="targetRecord" type="object" access="global"/>
+    <aura:attribute name="targetFields" type="string" access="global"/>
     <aura:attribute name="deploymentId" type="string" access="private"/>
     
-    <aura:method name="saveRecord" action="{!c.saveRecord}"/> 
+    <aura:method name="saveRecord" action="{!c.saveRecord}" access="global"/> 
     
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>    
     
-    <aura:registerEvent name="recordUpdated" type="c:metadataRecordDataResult"/>
+    <aura:registerEvent name="recordUpdated" type="c:metadataRecordDataResult" access="global"/>
 
-    <c:streaming channel="/event/MetadataDeployment__e" onMessage="{!c.handleDeploymentEvent}"/>
+    <!-- TODO: Remove hardcoded namespace reference-->
+    <c:streaming channel="/event/cmds__MetadataDeployment__e" onMessage="{!c.handleDeploymentEvent}"/>
     	
 </aura:component>

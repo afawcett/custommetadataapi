@@ -60,22 +60,22 @@
         .deployId;            
  **/                
 
-public with sharing class CustomMetadata {
+global with sharing class CustomMetadata {
 
-    public static final Operations Operations = new Operations();
+    global static final Operations Operations = new Operations();
 
-    public class Operations {
+    global class Operations {
         
         private SaveResultCallback deployCallback;
         
-        public String deployId {get;private set;}
+        global String deployId {get;private set;}
         
         private Operations() { }   
                 
         /**
          * Takes a raw custom metadata record list and deploys it
          **/
-        public Operations enqueueUpsertRecords(List<Metadata.CustomMetadata> records) {
+        global Operations enqueueUpsertRecords(List<Metadata.CustomMetadata> records) {
             // TODO: Throw an exception if duplicates found
             // TODO: Throw exception if the callback has not been set
             Metadata.DeployContainer mdContainer = new Metadata.DeployContainer();
@@ -93,7 +93,7 @@ public with sharing class CustomMetadata {
          * Leverages the fact that MDT SObject's can be bound and thus edited on a VF page!
          * And the hope that one day we can edit in memory native MDT SObject type fields ;-)
          **/
-        public Operations enqueueUpsertRecords(List<SObject> records) {
+        global Operations enqueueUpsertRecords(List<SObject> records) {
             // TODO: Throw an exception for empty lists
             SObjectType sObjectType = records[0].getSObjectType();
             DescribeSObjectResult dsr = sObjectType.getDescribe();
@@ -120,7 +120,7 @@ public with sharing class CustomMetadata {
          * @param sobjectType the SObjectType of the MDT object via MyCustomMetadata__c.getSObjectType()
          * @param sobjectRecords the list of field value maps representing the records
          **/
-        public Operations enqueueUpsertRecords(SObjectType sobjectType, List<Map<SObjectField, Object>> sObjectRecords) {
+        global Operations enqueueUpsertRecords(SObjectType sobjectType, List<Map<SObjectField, Object>> sObjectRecords) {
             List<Metadata.CustomMetadata> records = new List<Metadata.CustomMetadata>();            
             for (Map<SObjectField, Object> sObjectRecord : sObjectRecords) {
                 Metadata.CustomMetadata customMetadataRecord = new Metadata.CustomMetadata();
@@ -148,7 +148,7 @@ public with sharing class CustomMetadata {
         /** 
          * Registers a custom callback implementation 
          **/
-        public Operations callback(SaveResultCallback saveResultCallback) {
+        global Operations callback(SaveResultCallback saveResultCallback) {
             this.deployCallback = saveResultCallback;
             return this;
         }
@@ -157,7 +157,7 @@ public with sharing class CustomMetadata {
          * Fires the given Platform Event populating the given message field with a 
          *   JSON serialised representation of SaveRecordResult
          **/
-        public Operations callback(SObjectType eventType, SObjectField deploymentIdField, SObjectField messageField) {
+        global Operations callback(SObjectType eventType, SObjectField deploymentIdField, SObjectField messageField) {
             return callback(new PublishEventCallback(eventType, deploymentIdField, messageField));
         }        
     }    
@@ -165,7 +165,7 @@ public with sharing class CustomMetadata {
     /**
      * Example callback to dump results to debug log
      **/
-    public class DebugCallback extends SaveResultCallback {
+    global class DebugCallback extends SaveResultCallback {
         public override void handleResult(String deployId, List<SaveRecordResult> results) {
             System.debug('Deploy Id is ' + deployId);
             for(SaveRecordResult result : results) {
@@ -181,13 +181,13 @@ public with sharing class CustomMetadata {
     /**
      * Sends a Platform Event in response to a Metadata Deploy callback
      **/
-    private class PublishEventCallback extends SaveResultCallback {
+    global class PublishEventCallback extends SaveResultCallback {
         
         private SObjectType eventType;
         private SObjectField messageField;
         private SObjectFIeld deploymentIdField;
         
-        public PublishEventCallback(SObjectType eventType, SObjectField deploymentIdField, SObjectField messageField) {
+        global PublishEventCallback(SObjectType eventType, SObjectField deploymentIdField, SObjectField messageField) {
             this.eventType = eventType;
             this.messageField = messageField;
             this.deploymentIdField = deploymentIdField;
@@ -220,11 +220,11 @@ public with sharing class CustomMetadata {
      * Base class handler for internal and external handlers, 
      *   marshalls internal deploy results into something easier to handle
      **/
-    public abstract class SaveResultCallback implements Metadata.DeployCallback         
+    global abstract class SaveResultCallback implements Metadata.DeployCallback         
     {
-        public String deployId {get; private set;}
+        global String deployId {get; private set;}
         
-        public SaveResultCallback() {
+        global SaveResultCallback() {
             // Credit: https://success.salesforce.com/ideaView?id=08730000000KgTYAA0
             deployId = EncodingUtil.convertToHex(Crypto.generateAesKey(128));    
         }
@@ -257,20 +257,20 @@ public with sharing class CustomMetadata {
         /**
          * Handler for simplified metadata deployment result based around custom metadata records
          **/
-        public abstract void handleResult(String deployId, List<SaveRecordResult> results);
+        global abstract void handleResult(String deployId, List<SaveRecordResult> results);
     }
     
-    public class SaveRecordResult {
+    global class SaveRecordResult {
         @AuraEnabled
         // TODO: Maybe resolve to the SObjectType and avoid namespace issues, does this marshal via Aura though?
-        public String fullName;
+        global String fullName;
         @AuraEnabled
-        public Boolean success;
+        global Boolean success;
         @AuraEnabled
-        public String message;
+        global String message;
     }
     
-    public class CustomMetadataException extends Exception {}
+    global class CustomMetadataException extends Exception {}
     
     /**
      * Basic dependency injection impl for platform APIs leveraged by this class

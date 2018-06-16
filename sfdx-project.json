@@ -1,11 +1,22 @@
 {
-  "packageDirectories": [
-    {
-      "path": "force-app",
-      "default": true
+    "packageDirectories": [
+        {
+            "path": "force-app",
+            "package": "cmds",
+            "versionName": "ver 0.1",
+            "versionNumber": "0.1.0.NEXT",
+            "default": true
+        }
+    ],
+    "namespace": "cmds",
+    "sfdcLoginUrl": "https://login.salesforce.com",
+    "sourceApiVersion": "43.0",
+    "packageAliases": {
+        "cmds": "0Ho6A000000TN4ESAW",
+        "cmds@0.1.0-3": "04t6A000003KeKyQAK",
+        "cmds@0.1.0-4": "04t6A000003KeL3QAK",
+        "cmds@0.1.0-5": "04t6A000003KeL8QAK",
+        "cmds@0.1.0-6": "04t6A000003KeLDQA0",
+        "cmds@0.1.0-7": "04t6A000003KeLIQA0"
     }
-  ],
-  "namespace": "",
-  "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "43.0"
 }
