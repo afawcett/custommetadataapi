@@ -5,3 +5,5 @@ salesforce.schema
 
 .tern-project
 .DS_Store
+.sfdx
+.vscode
