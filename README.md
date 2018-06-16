@@ -3,7 +3,4 @@ Apex, Visualforce and Lightning Components for working with Custom Metadata Reco
 
 See this [blog](https://andyinthecloud.com/2017/08/29/introducing-custom-metadata-services/) for more information.
 
-<a href="https://githubsfdeploy.herokuapp.com">
-  <img alt="Deploy to Salesforce"
-       src="https://raw.githubusercontent.com/afawcett/githubsfdeploy/master/src/main/webapp/resources/img/deploy.png">
-</a>
+[![Deploy](https://deploy-to-sfdx.com/dist/assets/images/DeployToSFDX.svg)](https://deploy-to-sfdx.com)
